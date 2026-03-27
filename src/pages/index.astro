@@ -1,0 +1,392 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { Image } from 'astro:assets';
+
+import macbook from '../assets/obj/macbook.png';
+import earphones from '../assets/obj/earphones.png';
+import tea from '../assets/obj/tea.png';
+import euro from '../assets/obj/euro.png';
+import sol from '../assets/obj/sol.png';
+import miles from '../assets/obj/miles.png';
+
+const stack = ["Java", "Spring Boot", "React Native", "TypeScript", "React", "SQL", "ZKoss", "Hibernate", "Git", "Tailwind"];
+
+---
+
+<style>
+  /* Lo que Tailwind no puede expresar limpiamente */
+
+  /* Grid texture del hero y footer */
+  .hero::before,
+  .footer-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .footer-grid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sticky note: estilos visuales con background-blend-mode */
+  .sticky-note {
+    background-image:
+      linear-gradient(180deg, #f5e03a 0%, #f0d930 100%),
+      repeating-linear-gradient(
+        transparent, transparent 22px,
+        rgba(0,0,0,0.07) 22px, rgba(0,0,0,0.07) 23px
+      );
+    background-blend-mode: multiply;
+    box-shadow:
+      0 1px 1px rgba(0,0,0,0.15),
+      0 4px 8px rgba(0,0,0,0.3),
+      0 12px 28px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .sticky-note:hover {
+    box-shadow: 6px 10px 30px rgba(0,0,0,0.5);
+  }
+
+  /* Fondo punteado sección principal */
+  .dot-bg {
+    background-color: #f9f9f7;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.108) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Cinta adhesiva */
+  .sticky-note::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 16px;
+    background: rgba(255,255,255,0.45);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+
+</style>
+
+<Layout>
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-100 flex justify-between items-center px-12 py-6 max-md:px-6 max-md:py-5">
+    <a href="/" id="nav-logo" class="font-syne font-extrabold text-[16px] tracking-[0.08em] uppercase text-[#f0ede8] no-underline transition-colors duration-300">Sebas</a>
+    <ul class="flex gap-9 list-none m-0 p-0 max-md:gap-5">
+      <li><a href="#experiencia" class="nav-link text-[13px] text-[#555] no-underline tracking-[0.05em] transition-colors duration-300">Experiencia</a></li>
+      <li><a href="#contacto" class="nav-link text-[13px] text-[#555] no-underline tracking-[0.05em] transition-colors duration-300">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero relative w-full h-screen min-h-170 flex items-center justify-center overflow-hidden bg-[#0e0e0e] rounded-b-6">
+
+    <!-- Objetos flotantes -->
+    <div class="absolute z-5 top-[4%] left-[2%] -rotate-12 animate-float-in [animation-delay:0.1s] group max-md:hidden">
+      <Image src={macbook} alt="" loading="eager" class="block w-72.5 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <div class="absolute z-5 top-[48%] left-[1%] rotate-14 animate-float-in [animation-delay:0.15s] group max-md:hidden">
+      <Image src={earphones} alt="" loading="eager" class="block w-35 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <div class="absolute z-5 top-[6%] right-[4%] -rotate-6 animate-float-in [animation-delay:0.2s] group max-md:hidden">
+      <Image src={tea} alt="" loading="eager" class="block w-40 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <div class="absolute z-6 bottom-[6%] left-[5%] rotate-12 animate-float-in [animation-delay:0.25s] group max-md:hidden">
+      <Image src={euro} alt="" loading="eager" class="block w-20 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <div class="absolute z-5 bottom-[9%] left-[9%] -rotate-6 animate-float-in [animation-delay:0.3s] group max-md:hidden">
+      <Image src={sol} alt="" loading="eager" class="block w-20 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <div class="absolute z-5 bottom-[4%] right-[4%] rotate-11 animate-float-in [animation-delay:0.35s] group max-md:hidden">
+      <Image src={miles} alt="" loading="eager" class="block w-36.25 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-[1.06]" />
+    </div>
+
+    <!-- Centro -->
+    <div class="relative z-10 text-center pointer-events-none select-none">
+
+      <!-- Sticky note -->
+      <div class="sticky-note relative w-36 pt-7 px-4 pb-7 -top-14 left-1/2 -translate-x-1/2 -rotate-6 animate-float-in [animation-delay:0.15s] pointer-events-auto z-20 cursor-default transition-[transform] duration-300">
+        <p class="text-[15px] font-semibold text-[#1a1500] leading-tight m-0 tracking-[-0.01em]">Fullstack<br>Developer</p>
+      </div>
+
+      <h1 class="font-syne font-extrabold text-[clamp(28px,10vw,110px)] leading-[0.95] tracking-[-0.03em] text-[#f0ede8] m-0">
+        Sebastián<span class="block">Sondor</span>
+      </h1>
+
+    </div>
+
+  </section>
+
+  <!-- RESTO DE LA PÁGINA -->
+  <div class="dot-bg">
+  <div class="max-w-3xl mx-auto px-4 sm:px-10">
+
+    <!-- Stack -->
+    <!-- Sobre mí -->
+    <section class="pt-20 pb-20 sm:pb-28">
+      <h2 class="font-syne font-bold text-xs tracking-widest uppercase mb-8 text-neutral-400">Sobre mí</h2>
+      <div class="space-y-4 max-w-2xl">
+        <p class="text-neutral-700 leading-relaxed">
+          Soy desarrollador fullstack con base en Madrid. Trabajo en una empresa de software y me gusta entender bien lo que hago antes de hacerlo. Soy bastante inquieto y siempre estoy trasteando con tecnologías nuevas, aprender es algo que no se me hace pesado.
+        </p>
+        <p class="text-neutral-500 leading-relaxed">
+          Fuera del trabajo leo, escucho música de todo tipo y quedo con amigos. Colecciono Lego desde hace tiempo y el té me parece infinitamente mejor que el café.
+        </p>
+      </div>
+    </section>
+
+    <!-- Experiencia -->
+    <section id="experiencia" class="pb-20 sm:pb-28">
+      <h2 class="font-syne font-bold text-xs tracking-widest uppercase mb-8 text-neutral-400">Experiencia</h2>
+      <div class="space-y-10">
+
+        <!-- Fullstack actual -->
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
+          <div class="sm:w-28 shrink-0 text-xs text-neutral-400 sm:pt-1 tabular-nums">Jun 2025 — Presente</div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <h3 class="font-syne font-bold text-neutral-900">Desarrollador Fullstack</h3>
+              <span class="text-[11px] bg-neutral-900 text-white px-2 py-0.5 rounded-full font-medium">Actual</span>
+            </div>
+            <p class="text-sm text-neutral-400 mb-5">Eportal, Software as Services · Madrid</p>
+
+            <div class="space-y-4">
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Integración AEAT</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Integración con la API de la AEAT para la presentación de impuestos directamente a Hacienda, gestionando el ciclo completo de envío, validación y seguimiento de estados de respuesta.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">ZKoss</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Veri*factu</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Adaptación de la plataforma de facturación al sistema Verifactu, procesando el ciclo completo de datos enviados y respuestas recibidas para mantener el estado de cada factura registrada.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">ZKoss</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Sistema de suscripción</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Diseño e implementación completa del modelo de suscripción de la plataforma de facturación, incluyendo integración con pasarela de pago para pagos recurrentes y gestión de planes.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Stripe</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">ZKoss</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Plugin WooCommerce</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Desarrollo de plugin en PHP para WooCommerce que genera automáticamente una factura en la plataforma por cada pedido completado.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">PHP</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">WooCommerce</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">REST API</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Plataforma declaración de la renta</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Plataforma para la gestión de declaraciones de IRPF, donde los gestores pueden administrar el proceso y los clientes hacer seguimiento del estado en tiempo real.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Spring Boot</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">ZKoss</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Apps móviles · React Native</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Desarrollo y mantenimiento de aplicaciones móviles con React Native y TypeScript. Participé en la adaptación de la plataforma de facturación a móvil y en el mantenimiento de las apps existentes.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">React Native</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">TypeScript</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+                <p class="font-syne font-bold text-xs text-neutral-900 uppercase tracking-wider mb-1">Migración API OpenAI</p>
+                <p class="text-sm text-neutral-500 leading-relaxed">Migración y refactorización del cliente de IA generativa en un proyecto Spring Boot, mejorando la eficiencia, reduciendo costes y actualizando la integración a los endpoints vigentes.</p>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Spring Boot</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">OpenAI API</span>
+                  <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Prácticas -->
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
+          <div class="sm:w-28 shrink-0 text-xs text-neutral-400 sm:pt-1 tabular-nums">Mar 2025 — Jun 2025</div>
+          <div class="flex-1">
+            <h3 class="font-syne font-bold text-neutral-900 mb-1">Desarrollador Backend <span class="font-normal text-neutral-400">· Prácticas</span></h3>
+            <p class="text-sm text-neutral-400 mb-5">Eportal, Software as Services · Madrid</p>
+            <div class="p-4 rounded-xl border border-neutral-200 bg-white">
+              <p class="text-sm text-neutral-500 leading-relaxed">Desarrollo de una API REST con Spring Boot para automatizar la gestión contable. Diseño de endpoints CRUD, integración con base de datos y pruebas en entorno de producción.</p>
+              <div class="flex gap-2 mt-3 flex-wrap">
+                <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Spring Boot</span>
+                <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">Java</span>
+                <span class="text-xs text-neutral-400 bg-neutral-100 px-2.5 py-0.5 rounded-full">SQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="pb-20 sm:pb-28">
+      <h2 class="font-syne font-bold text-xs tracking-widest uppercase mb-6 text-neutral-400">Tecnologías</h2>
+      <div class="flex flex-wrap gap-2">
+        {stack.map(tech => (
+          <span class="px-3 py-1.5 bg-white border border-neutral-200 text-neutral-600 text-sm rounded-full hover:border-neutral-900 hover:text-neutral-900 transition-all duration-200 cursor-default">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </section>
+
+  </div>
+  </div>
+
+  <!-- Footer oscuro con contacto -->
+  <footer id="contacto" class="footer-grid bg-[#0e0e0e] mt-8">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 pt-20 pb-12">
+
+      <!-- Layout horizontal en desktop, vertical en mobile -->
+      <div class="flex flex-col sm:flex-row sm:gap-16 sm:items-start">
+
+        <!-- Nombre estilo hero -->
+        <div class="shrink-0 mb-12 sm:mb-0 sm:sticky sm:top-24">
+          <h2 class="font-syne font-extrabold text-[clamp(36px,4.5vw,64px)] leading-[0.95] tracking-[-0.03em] text-[#f0ede8]">
+            Sebastián<span class="block">Sondor</span>
+          </h2>
+          <p class="text-[#555] text-sm mt-4 leading-relaxed max-w-50">
+            ¿Hablamos? Escríbeme.
+          </p>
+        </div>
+
+        <!-- Formulario -->
+        <form id="contact-form" action="https://formspree.io/f/xzdjqwoa" method="POST" class="flex-1 space-y-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="name" class="text-xs text-[#555] uppercase tracking-wider">Nombre</label>
+            <input
+              id="name" type="text" name="name" required placeholder="Tu nombre"
+              class="bg-transparent border border-[#2a2a2a] rounded-lg px-4 py-2.5 text-sm text-[#f0ede8] placeholder:text-[#444] focus:outline-none focus:border-[#555] transition-all duration-200"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="email" class="text-xs text-[#555] uppercase tracking-wider">Email</label>
+            <input
+              id="email" type="email" name="email" required placeholder="tu@email.com"
+              class="bg-transparent border border-[#2a2a2a] rounded-lg px-4 py-2.5 text-sm text-[#f0ede8] placeholder:text-[#444] focus:outline-none focus:border-[#555] transition-all duration-200"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="message" class="text-xs text-[#555] uppercase tracking-wider">Mensaje</label>
+            <textarea
+              id="message" name="message" required rows="5" placeholder="Cuéntame..."
+              class="bg-transparent border border-[#2a2a2a] rounded-lg px-4 py-2.5 text-sm text-[#f0ede8] placeholder:text-[#444] focus:outline-none focus:border-[#555] transition-all duration-200 resize-none"
+            ></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="w-full sm:w-auto px-6 py-2.5 border border-[#333] rounded-full text-sm text-[#f0ede8] hover:bg-white/6 hover:border-[#555] active:scale-[0.98] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+            Enviar mensaje
+          </button>
+          <p id="form-success" class="hidden text-sm text-[#f0ede8] opacity-60">Mensaje enviado, te respondo pronto.</p>
+          <p id="form-error" class="hidden text-sm text-red-400">Algo ha fallado, inténtalo de nuevo.</p>
+        </form>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="mt-16 pt-8 border-t border-[#1a1a1a] flex justify-between items-center">
+        <span class="font-syne font-bold text-xs text-[#333] tracking-widest uppercase">© 2026</span>
+        <div class="flex gap-5 items-center">
+          {/* <a href="https://github.com/sebastiansondor" target="_blank" rel="noopener" class="text-[#444] hover:text-[#f0ede8] transition-colors duration-200" aria-label="GitHub">
+            <Icon name="github" class="w-5 h-5" />
+          </a> */}
+          <a href="https://www.linkedin.com/in/sebastián-sondor-chumbiriza-2ab4b32bb/" target="_blank" rel="noopener" class="text-[#444] hover:text-[#f0ede8] transition-colors duration-200" aria-label="LinkedIn">
+            <Icon name="linkedin" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+<script>
+  const logo = document.getElementById('nav-logo');
+  const links = document.querySelectorAll('.nav-link');
+  const hero = document.querySelector('.hero') as HTMLElement;
+
+  function updateNav() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const onLight = heroBottom < 60;
+
+    logo!.style.color = onLight ? '#1a1a1a' : '#f0ede8';
+    links.forEach(link => {
+      (link as HTMLElement).style.color = onLight ? '#555' : '#555';
+      (link as HTMLElement).onmouseenter = () => {
+        (link as HTMLElement).style.color = onLight ? '#1a1a1a' : '#f0ede8';
+      };
+      (link as HTMLElement).onmouseleave = () => {
+        (link as HTMLElement).style.color = '#555';
+      };
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const success = document.getElementById('form-success')!;
+  const error = document.getElementById('form-error')!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    error.classList.add('hidden');
+
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+    });
+
+    if (res.ok) {
+      form.reset();
+      success.classList.remove('hidden');
+      btn.classList.add('hidden');
+    } else {
+      error.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'Enviar mensaje';
+    }
+  });
+</script>
+
+</Layout>

@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+@theme {
+  --font-syne: 'Syne', sans-serif;
+  --animate-float-in: floatIn 0.8s ease both;
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f7;
+  color: #1a1a1a;
+}
+
+::selection {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
