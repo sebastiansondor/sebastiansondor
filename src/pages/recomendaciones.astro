@@ -1,0 +1,904 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const anime = [
+  { kanji: '悪', title: "Takopi's Original Sin", sub: "タコピの原罪 — Dos niñas en situaciones límite. Una amistad imposible. Oscuro de verdad.", genre: "Drama psicológico", genreColor: "lila", year: "2023" },
+  { kanji: '獄', title: "Hell's Paradise", sub: "地獄楽 — Shinobi condenado a muerte vs. una isla llena de monstruos divinos. Visualmente brutal.", genre: "Acción · Sobrenatural", genreColor: "lila", year: "2023" },
+  { kanji: '薬', title: "Los diarios de la boticaria", sub: "薬屋のひとりごと — Una chica con talento para las medicinas en la corte imperial china. Elegante.", genre: "Misterio · Histórico", genreColor: "lila", year: "2023" },
+  { kanji: '蛇', title: "Dorohedoro", sub: "世界観が全て — Mundo distópico, hechiceros, identidades perdidas. Rara y adictiva. Imprescindible.", genre: "Fantasía oscura", genreColor: "lila", year: "2020" },
+  { kanji: '廃', title: "Gachiakuta", sub: "ガチアクタ — Mundo dividido en niveles. Los rechazados caen al abismo. Arte increíble, energía pura.", genre: "Acción · Aventura", genreColor: "lila", year: "2024" },
+];
+
+const films = [
+  { kanji: '夢', title: "La La Land", sub: "Los sueños vs. el amor. Colores increíbles, música que se te queda semanas. Terminas con ganas de más.", genre: "Musical · Romance", year: "2016", tall: true },
+  { kanji: '階', title: "Parásitos", sub: "기생충 — Obra maestra de Bong Joon-ho. Clases sociales, tensión y giros que no ves venir. Sin spoilers.", genre: "Thriller · Drama", year: "2019", tall: true },
+  { kanji: '眼', title: "Look Book", sub: "Estética que corta. Una de esas que se queda en tu cabeza por el mood más que por la trama.", genre: "Drama", year: "—", tall: false },
+];
+
+const books = [
+  { title: "Almendra", author: "Sohn Won-pyung — Ficción coreana", tag: "Novela" },
+  { title: "Una breve historia de casi todo", author: "Bill Bryson — Divulgación científica", tag: "Ensayo" },
+  { title: "La biblioteca de medianoche", author: "Matt Haig — Ficción contemporánea", tag: "Novela" },
+  { title: "Un mundo feliz", author: "Aldous Huxley — Distopía", tag: "Clásico" },
+];
+
+const totalItems = anime.length + films.length + books.length;
+---
+
+<Layout
+  title="推薦 — Recomendaciones · Sebastián Sondor"
+  description="Selección curada de anime, películas y libros. Vol. 01 / 2026."
+>
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <div class="reco">
+
+    <header class="masthead">
+      <div class="masthead-watermark">推薦</div>
+
+      <div class="masthead-top">
+        <div class="masthead-label">
+          <strong>推薦</strong>
+          Selección de contenido
+        </div>
+        <div class="masthead-meta">
+          <b>Vol. 01 / 2026</b>
+          アニメ · 映画 · 本
+        </div>
+      </div>
+
+      <a class="back-link" href="/">← Volver al índice · 戻る</a>
+
+      <div class="masthead-title-wrap">
+        <span class="masthead-eyebrow">コンテンツ・リスト</span>
+        <h1 class="masthead-title">
+          <em>Mis</em><br />
+          <span class="outlined">Recom</span>en<br />
+          daciones
+        </h1>
+      </div>
+
+      <div class="masthead-bottom">
+        <nav class="cat-nav">
+          <a href="#anime" class="active">アニメ</a>
+          <a href="#films">映画</a>
+          <a href="#books">本</a>
+        </nav>
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="progress-fill" id="prog-fill"></div>
+          </div>
+          <p class="progress-text"><span id="prog-n">0</span> / <span id="prog-total">{totalItems}</span> completados</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section class="section" id="anime">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <div class="section-titles">
+            <span class="section-jp">アニメ</span>
+            <h2 class="section-name lila">Anime</h2>
+          </div>
+          <span class="section-count" id="anime-count">0 / {anime.length} vistos</span>
+        </div>
+
+        <div class="cards-grid col3">
+          {anime.map((item) => (
+            <div class="card" data-section="anime" data-color="lila" data-id={`anime:${item.title}`}>
+              <div class="card-corner-jp">{item.kanji}</div>
+              <div class="card-top">
+                <span class={`card-genre ${item.genreColor}`}>{item.genre}</span>
+                <button class="check-btn lila" type="button" aria-label="Marcar como visto">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+              <p class="card-title">{item.title}</p>
+              <p class="card-sub">{item.sub}</p>
+              <div class="card-footer">
+                <span class="card-status">Pendiente</span>
+                <span class="card-year">{item.year}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="strip">
+        <span class="strip-text">
+          アニメ · 映画 · 本 · コンテンツ · 推薦 · ANIME · FILMS · BOOKS · CONTENT · RECOMMENDATIONS · アニメ · 映画 · 本 · コンテンツ · 推薦 · ANIME · FILMS · BOOKS · CONTENT · RECOMMENDATIONS ·
+        </span>
+      </div>
+
+      <section class="section" id="films">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <div class="section-titles">
+            <span class="section-jp">映画</span>
+            <h2 class="section-name rose">Películas</h2>
+          </div>
+          <span class="section-count" id="films-count">0 / {films.length} vistas</span>
+        </div>
+
+        <div class="cards-grid col2">
+          {films.map((item) => (
+            <div class:list={["card", item.tall && "card-tall"]} data-section="films" data-color="rose" data-id={`films:${item.title}`}>
+              <div class="card-corner-jp">{item.kanji}</div>
+              <div class="card-top">
+                <span class="card-genre rose">{item.genre}</span>
+                <button class="check-btn rose" type="button" aria-label="Marcar como vista">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+              <p class="card-title">{item.title}</p>
+              <p class="card-sub">{item.sub}</p>
+              <div class="card-footer">
+                <span class="card-status">Pendiente</span>
+                <span class="card-year">{item.year}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" id="books">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <div class="section-titles">
+            <span class="section-jp">本</span>
+            <h2 class="section-name sage">Libros</h2>
+          </div>
+          <span class="section-count" id="books-count">0 / {books.length} leídos</span>
+        </div>
+
+        <div class="book-list">
+          {books.map((b, i) => (
+            <div class="book-row" data-section="books" data-id={`books:${b.title}`}>
+              <span class="book-num">{String(i + 1).padStart(2, '0')}</span>
+              <div class="book-info">
+                <p class="book-title">{b.title}</p>
+                <p class="book-author">{b.author}</p>
+              </div>
+              <span class="book-genre">{b.tag}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-left"><strong>Loni</strong> — Vol. 01</p>
+      <p class="footer-right">推薦リスト · 2026</p>
+    </footer>
+
+    <div class="toast" id="toast">¡Todo completado! <span>推薦完了</span></div>
+  </div>
+</Layout>
+
+<style is:global>
+  .reco {
+    --cream:      #F3F0E8;
+    --cream-dark: #EAE6DC;
+    --ink:        #18151A;
+    --ink-soft:   #3A3540;
+    --muted:      #9490A0;
+    --rule:       #C8C3B8;
+
+    --lila:       #7B56CC;
+    --lila-mid:   #B09BE0;
+    --lila-pale:  #EDE7FA;
+    --lila-dark:  #5A3BAA;
+
+    --rose:       #C45C7E;
+    --rose-pale:  #FAECF2;
+
+    --sage:       #3D9068;
+    --sage-pale:  #E3F2EB;
+
+    --amber:      #B87830;
+    --amber-pale: #FAF0E0;
+
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    min-height: 100vh;
+    display: block;
+  }
+
+  .reco *, .reco *::before, .reco *::after {
+    box-sizing: border-box;
+  }
+
+  html:has(.reco) { scroll-behavior: smooth; background: #F3F0E8; }
+  body:has(.reco) { background: #F3F0E8; margin: 0; }
+
+  /* ─── MASTHEAD ─── */
+  .reco .masthead {
+    position: relative;
+    padding: 2.5rem 5vw 0;
+    overflow: hidden;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .reco .masthead-watermark {
+    position: absolute;
+    top: -1rem;
+    right: -2rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: min(26vw, 240px);
+    font-weight: 700;
+    color: var(--ink);
+    opacity: 0.035;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .reco .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+
+  .reco .masthead-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .reco .masthead-label strong {
+    display: block;
+    color: var(--lila);
+    font-weight: 700;
+  }
+
+  .reco .masthead-meta {
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .reco .masthead-meta b {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  .reco .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+
+  .reco .back-link:hover { color: var(--lila); }
+
+  .reco .masthead-title-wrap {
+    position: relative;
+    margin-bottom: 1.75rem;
+  }
+
+  .reco .masthead-eyebrow {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--lila);
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .reco .masthead-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 600;
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .reco .masthead-title em {
+    font-style: italic;
+    color: var(--lila);
+  }
+
+  .reco .masthead-title .outlined {
+    -webkit-text-stroke: 1.5px var(--ink);
+    color: transparent;
+  }
+
+  .reco .masthead-bottom {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-top: 0.5px solid var(--rule);
+    margin: 0 -5vw;
+    padding: 0.65rem 5vw;
+  }
+
+  .reco .cat-nav {
+    display: flex;
+    gap: 0;
+    flex: 1;
+  }
+
+  .reco .cat-nav a {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0 1.5rem 0 0;
+    transition: color 0.2s;
+  }
+
+  .reco .cat-nav a:hover { color: var(--ink); }
+
+  .reco .cat-nav a.active {
+    color: var(--lila);
+    font-weight: 500;
+  }
+
+  .reco .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .reco .progress-bar {
+    width: 80px;
+    height: 2px;
+    background: var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .reco .progress-fill {
+    height: 100%;
+    background: var(--lila);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .reco .progress-text {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .reco .progress-text span { color: var(--lila); font-weight: 500; }
+
+  /* ─── MAIN LAYOUT ─── */
+  .reco .main {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 5vw 6rem;
+  }
+
+  /* ─── SECTION ─── */
+  .reco .section { padding-top: 4.5rem; }
+
+  .reco .section-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .reco .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .reco .section-titles {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .reco .section-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+  }
+
+  .reco .section-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .reco .section-name.lila { color: var(--lila-dark); }
+  .reco .section-name.rose { color: var(--rose); }
+  .reco .section-name.sage { color: var(--sage); }
+
+  .reco .section-count {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── CARDS GRID ─── */
+  .reco .cards-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .reco .cards-grid.col3 { grid-template-columns: repeat(3, 1fr); }
+  .reco .cards-grid.col2 { grid-template-columns: repeat(2, 1fr); }
+
+  @media (max-width: 700px) {
+    .reco .cards-grid.col3,
+    .reco .cards-grid.col2 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── CARD ─── */
+  .reco .card {
+    background: var(--cream);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 160px;
+  }
+
+  .reco .card:hover { background: var(--cream-dark); }
+  .reco .card-tall { min-height: 200px; }
+
+  .reco .card.checked { opacity: 0.45; }
+  .reco .card.checked .card-title { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+  .reco .card-corner-jp {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.25rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    opacity: 0.06;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .reco .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .reco .card-genre {
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .reco .card-genre.lila { background: var(--lila-pale); color: var(--lila-dark); }
+  .reco .card-genre.rose { background: var(--rose-pale); color: var(--rose); }
+  .reco .card-genre.sage { background: var(--sage-pale); color: var(--sage); }
+  .reco .card-genre.amber { background: var(--amber-pale); color: var(--amber); }
+
+  .reco .check-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--rule);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+    padding: 0;
+  }
+
+  .reco .check-btn svg { opacity: 0; transition: opacity 0.15s; }
+  .reco .check-btn.done svg { opacity: 1; }
+
+  .reco .check-btn.lila.done { background: var(--lila); border-color: var(--lila); }
+  .reco .check-btn.rose.done { background: var(--rose); border-color: var(--rose); }
+  .reco .check-btn.sage.done { background: var(--sage); border-color: var(--sage); }
+
+  .reco .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    flex: 1;
+    margin: 0.25rem 0 0;
+  }
+
+  .reco .card-sub {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .reco .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--rule);
+  }
+
+  .reco .card-empty .card-footer { display: none; }
+
+  .reco .card-status {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .reco .card-status.seen { color: var(--sage); }
+
+  .reco .card-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* ─── BOOK LIST ─── */
+  .reco .book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .reco .book-row {
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.1rem 1.5rem;
+    border-bottom: 0.5px solid var(--rule);
+    cursor: pointer;
+    transition: background 0.15s;
+    background: var(--cream);
+  }
+
+  .reco .book-row:last-child { border-bottom: none; }
+  .reco .book-row:hover { background: var(--cream-dark); }
+  .reco .book-row.checked { opacity: 0.42; }
+  .reco .book-row.checked .book-title { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+  .reco .book-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--rule);
+    line-height: 1;
+    font-style: italic;
+  }
+
+  .reco .book-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .reco .book-author {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 2px 0 0;
+    font-weight: 300;
+  }
+
+  .reco .book-genre {
+    font-size: 8.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--sage-pale);
+    color: var(--sage);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ─── DIVIDER STRIP ─── */
+  .reco .strip {
+    margin: 4rem -5vw 0;
+    padding: 0.65rem 5vw;
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .reco .strip-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    white-space: nowrap;
+    opacity: 0.5;
+    animation: reco-marquee 30s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes reco-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ─── FOOTER ─── */
+  .reco .footer {
+    border-top: 1.5px solid var(--ink);
+    padding: 1.5rem 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .reco .footer-left {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .reco .footer-left strong {
+    font-style: normal;
+    color: var(--lila);
+    font-weight: 600;
+  }
+
+  .reco .footer-right {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ─── TOAST ─── */
+  .reco .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(4rem);
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.65rem 1.5rem;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 50;
+  }
+
+  .reco .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .reco .toast span { color: var(--lila-mid); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .reco .masthead-top { flex-direction: column; gap: 1rem; }
+    .reco .masthead-meta { text-align: left; }
+    .reco .footer { flex-direction: column; align-items: flex-start; }
+    .reco .book-row { grid-template-columns: 2.5rem 1fr; }
+    .reco .book-genre { display: none; }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'reco:vol01:checked';
+
+  const sectionLabels: Record<string, string> = {
+    anime: 'vistos',
+    films: 'vistas',
+    books: 'leídos',
+  };
+
+  function loadChecked(): Set<string> {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return new Set();
+      const parsed = JSON.parse(raw);
+      return new Set(Array.isArray(parsed) ? parsed : []);
+    } catch {
+      return new Set();
+    }
+  }
+
+  function saveChecked(set: Set<string>) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    } catch {
+      /* storage lleno o bloqueado — ignorar silenciosamente */
+    }
+  }
+
+  const checked = loadChecked();
+
+  const sectionTotals: Record<string, number> = {};
+  const sectionDone: Record<string, number> = {};
+
+  const items = Array.from(
+    document.querySelectorAll<HTMLElement>('.reco [data-section][data-id]')
+  );
+
+  items.forEach((el) => {
+    const section = el.dataset.section;
+    if (!section) return;
+    sectionTotals[section] = (sectionTotals[section] ?? 0) + 1;
+    sectionDone[section] = sectionDone[section] ?? 0;
+  });
+
+  const total = items.length;
+  let done = 0;
+
+  const progFill = document.getElementById('prog-fill') as HTMLElement | null;
+  const progN = document.getElementById('prog-n');
+  const progTotal = document.getElementById('prog-total');
+  const toast = document.getElementById('toast');
+
+  if (progTotal) progTotal.textContent = String(total);
+
+  function applyChecked(el: HTMLElement, isChecked: boolean) {
+    el.classList.toggle('checked', isChecked);
+    const btn = el.querySelector<HTMLElement>('.check-btn');
+    const status = el.querySelector<HTMLElement>('.card-status');
+    if (btn) btn.classList.toggle('done', isChecked);
+    if (status) {
+      status.textContent = isChecked ? 'Visto ✓' : 'Pendiente';
+      status.classList.toggle('seen', isChecked);
+    }
+  }
+
+  function updateProgress(celebrate = false) {
+    if (progFill) progFill.style.width = total ? Math.round((done / total) * 100) + '%' : '0%';
+    if (progN) progN.textContent = String(done);
+
+    for (const section of Object.keys(sectionTotals)) {
+      const el = document.getElementById(section + '-count');
+      if (el) {
+        el.textContent = `${sectionDone[section]} / ${sectionTotals[section]} ${sectionLabels[section] ?? ''}`;
+      }
+    }
+
+    if (celebrate && done === total && total > 0 && toast) {
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  }
+
+  // Estado inicial desde localStorage
+  items.forEach((el) => {
+    const id = el.dataset.id;
+    const section = el.dataset.section;
+    if (!id || !section) return;
+    if (checked.has(id)) {
+      applyChecked(el, true);
+      sectionDone[section] += 1;
+      done += 1;
+    }
+  });
+
+  // Limpiar IDs huérfanos (items que ya no existen) y persistir
+  const validIds = new Set(items.map((el) => el.dataset.id!).filter(Boolean));
+  let cleaned = false;
+  for (const id of [...checked]) {
+    if (!validIds.has(id)) {
+      checked.delete(id);
+      cleaned = true;
+    }
+  }
+  if (cleaned) saveChecked(checked);
+
+  function toggle(el: HTMLElement) {
+    const id = el.dataset.id;
+    const section = el.dataset.section;
+    if (!id || !section) return;
+
+    const isChecked = !el.classList.contains('checked');
+    applyChecked(el, isChecked);
+
+    if (isChecked) checked.add(id);
+    else checked.delete(id);
+    saveChecked(checked);
+
+    sectionDone[section] = Math.max(0, sectionDone[section] + (isChecked ? 1 : -1));
+    done = Math.max(0, done + (isChecked ? 1 : -1));
+    updateProgress(true);
+  }
+
+  items.forEach((el) => el.addEventListener('click', () => toggle(el)));
+
+  updateProgress();
+
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.reco .cat-nav a');
+  const sections = ['anime', 'films', 'books']
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  function onScroll() {
+    const y = window.scrollY + 120;
+    let active = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= y) active = s;
+    }
+    navLinks.forEach((a) => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + (active?.id ?? ''));
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
